@@ -1,48 +1,48 @@
-#include "ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â.h"
+ï»¿#include "íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-void ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::ÁøÇà()
+void íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°::ì§„í–‰()
 {
-    //ÅÃ¹è ¿ë´ŞÂ÷ÀÇ ¿ë·®
+    //íƒë°° ìš©ë‹¬ì°¨ì˜ ìš©ëŸ‰
     int cap = 4;
 
-    //ÅÃ¹è ¹è´ŞÇÒ °¡±¸ÀÇ ¼ö
+    //íƒë°° ë°°ë‹¬í•  ê°€êµ¬ì˜ ìˆ˜
     int n = 5;
 
-    //¹°°ÇÀ» ¹è´ŞÇØ¾ßÇÏ´Â °¡±¸ÀÇ ¹è¿­
+    //ë¬¼ê±´ì„ ë°°ë‹¬í•´ì•¼í•˜ëŠ” ê°€êµ¬ì˜ ë°°ì—´
     vector<int> deliveries = { 1, 0, 3, 1, 2 };
 
-    //¹°°ÇÀ» ¼ö°ÅÇØ¾ßÇÏ´Â °¡±¸ÀÇ ¹è¿­
+    //ë¬¼ê±´ì„ ìˆ˜ê±°í•´ì•¼í•˜ëŠ” ê°€êµ¬ì˜ ë°°ì—´
     vector<int> pickup = { 0, 3, 0, 4, 0 };
     std::cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
 }
 
 #define INDEX_MAX 1000000
 
-long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, vector<int> pickups)
+long long íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°::solution(int cap, int n, vector<int> deliveries, vector<int> pickups)
 {
-    //Ãâ·ÂÇÒ ´ä
+    //ì¶œë ¥í•  ë‹µ
     long long answer = -1;
 
-    //ÀÌµ¿ÇÑ °Å¸®°¡ ´ä
+    //ì´ë™í•œ ê±°ë¦¬ê°€ ë‹µ
     long long& distance = answer;
 
-    //ÃÖ´ë  °¡Áú ¼ö ÀÖ´Â ÅÃ¹è ¹è´ŞÀÇ ¿ë·®
+    //ìµœëŒ€  ê°€ì§ˆ ìˆ˜ ìˆëŠ” íƒë°° ë°°ë‹¬ì˜ ìš©ëŸ‰
     int max_cap = cap;
-    //ÇöÀç °¡Áö°í ÀÖ´Â ÅÃ¹è ¹è´ŞÀÇ ¿ë·®
+    //í˜„ì¬ ê°€ì§€ê³  ìˆëŠ” íƒë°° ë°°ë‹¬ì˜ ìš©ëŸ‰
     int cur_cap = 0;
 
-    //¹è´ŞÇØ¾ßÇÒ ÅÃ¹èÀÇ ¼ö
+    //ë°°ë‹¬í•´ì•¼í•  íƒë°°ì˜ ìˆ˜
     int needDelivery = 0;
     for(auto delivery : deliveries)
     {
         needDelivery += delivery;
     }
 
-    //¼ö°ÅÇØ¾ßÇÒ ÅÃ¹èÀÇ ¼ö
+    //ìˆ˜ê±°í•´ì•¼í•  íƒë°°ì˜ ìˆ˜
     int needPickup = 0;
     for (auto pickup : pickups)
     {
@@ -50,33 +50,33 @@ long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, v
     }
 
     
-#pragma region ´Ü¼ø
+#pragma region ë‹¨ìˆœ
 
-    //¹è´ŞÀ» ½ÃÀÛÇÕ´Ï´Ù.
+    //ë°°ë‹¬ì„ ì‹œì‘í•©ë‹ˆë‹¤.
 
     
-    int index = -1; //ÇöÀç ÅÃ¹è°¡ ¾îµğ¸¦ ÇâÇÏ°í ÀÖ´ÂÁö¿¡ µû¸¥ ÀÎµ¦½º °ª
-    int direction = 1; //ÇöÀç ÅÃ¹è°¡ ¾î´À ¹æÇâÀ¸·Î °¡´ÂÁö 1 or -1
+    int index = -1; //í˜„ì¬ íƒë°°ê°€ ì–´ë””ë¥¼ í–¥í•˜ê³  ìˆëŠ”ì§€ì— ë”°ë¥¸ ì¸ë±ìŠ¤ ê°’
+    int direction = 1; //í˜„ì¬ íƒë°°ê°€ ì–´ëŠ ë°©í–¥ìœ¼ë¡œ ê°€ëŠ”ì§€ 1 or -1
     int turningPoint = n-1;
 
-    vector<int> deliveryPlan = {}; //¹è´ŞÇÒ ¹°°Ç °èÈ¹
-    vector<int> pickupPlan = {}; // ¼ö°ÅÇÒ ¹°°Ç °èÈ¹
-    //ÇöÀç ¿î¹İÇØ¾ßÇÒ ¹°°ÇÀÌ ¾øÀ¸¸é
+    vector<int> deliveryPlan = {}; //ë°°ë‹¬í•  ë¬¼ê±´ ê³„íš
+    vector<int> pickupPlan = {}; // ìˆ˜ê±°í•  ë¬¼ê±´ ê³„íš
+    //í˜„ì¬ ìš´ë°˜í•´ì•¼í•  ë¬¼ê±´ì´ ì—†ìœ¼ë©´
     while (needDelivery > 0 || needPickup > 0) 
     {   
-        //ÀÎµ¦½º ¹üÀ§ ¾È¿¡ ¾øÀ¸¸é
+        //ì¸ë±ìŠ¤ ë²”ìœ„ ì•ˆì— ì—†ìœ¼ë©´
         if (index < 0)
         {
-            //¸ğµç ¹°°ÇÀ» ´Ù½Ã Ã¤¿ì±â
+            //ëª¨ë“  ë¬¼ê±´ì„ ë‹¤ì‹œ ì±„ìš°ê¸°
             cur_cap = max_cap;
             
-            //¹è¼Û°èÈ¹ ¼¼¿ì±â
+            //ë°°ì†¡ê³„íš ì„¸ìš°ê¸°
             for (int i = n - 1; i >= 0; i--)
             {
                 auto& delivery = deliveries[i];
                 auto& pickup = pickups[i];
 
-                //¹İÈ¯Á¡ È®ÀÎÇÏ±â
+                //ë°˜í™˜ì  í™•ì¸í•˜ê¸°
                 if (deliveries[turningPoint] == 0 && deliveries[turningPoint] == 0)
                 {
                     turningPoint--;
@@ -92,7 +92,7 @@ long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, v
             }
 
             direction = 1;
-            index = 0; //½ÃÀÛÁ¡À¸·Î °¡±â
+            index = 0; //ì‹œì‘ì ìœ¼ë¡œ ê°€ê¸°
         }
         else if (index > (turningPoint))
         {
@@ -101,25 +101,25 @@ long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, v
         }
 
 
-        //¾ÕÀ¸·Î °¡¸é ÅÃ¹è ¹è´ŞÇÏ±â
+        //ì•ìœ¼ë¡œ ê°€ë©´ íƒë°° ë°°ë‹¬í•˜ê¸°
         if (direction > 0)
         {
-            //¿î¹İÇØ¾ßÇÒ Å©±â
+            //ìš´ë°˜í•´ì•¼í•  í¬ê¸°
             int deliveryAmount = min(cur_cap, deliveries[index]);
 
-            //ÅÃ¹èÂ÷¿¡ ¹°°Ç ³»·Á³õ±â
-            deliveries[index] -= deliveryAmount; // ¹è¼ÛÇØ¾ßµÉ ¹°°ÇÀ» ¹è¼ÛÇßÀ¸´Ï °¨¼Ò
-            cur_cap -= deliveryAmount; //ÅÃ¹è ¿ë·® »ı°åÀ¸´Ï ¿ë·® Áõ°¡
-            needDelivery -= deliveryAmount; //¹è¼ÛÇØ¾ßµÉ ¹°°ÇÀ» ¹è¼ÛÇßÀ¸´Ï °¨¼Ò
+            //íƒë°°ì°¨ì— ë¬¼ê±´ ë‚´ë ¤ë†“ê¸°
+            deliveries[index] -= deliveryAmount; // ë°°ì†¡í•´ì•¼ë  ë¬¼ê±´ì„ ë°°ì†¡í–ˆìœ¼ë‹ˆ ê°ì†Œ
+            cur_cap -= deliveryAmount; //íƒë°° ìš©ëŸ‰ ìƒê²¼ìœ¼ë‹ˆ ìš©ëŸ‰ ì¦ê°€
+            needDelivery -= deliveryAmount; //ë°°ì†¡í•´ì•¼ë  ë¬¼ê±´ì„ ë°°ì†¡í–ˆìœ¼ë‹ˆ ê°ì†Œ
         }
 
-        //µÚ·Î °¡¸é ÅÃ¹è ¼ö°ÅÇÏ±â
+        //ë’¤ë¡œ ê°€ë©´ íƒë°° ìˆ˜ê±°í•˜ê¸°
         if (direction < 0)
         {
-            //¿î¹İÇØ¾ßÇÒ Å©±â
+            //ìš´ë°˜í•´ì•¼í•  í¬ê¸°
             int pickupAmount = min(max_cap - cur_cap, pickups[index]);
 
-            //ÅÃ¹èÂ÷¿¡ ¹°°Ç ½Æ±â
+            //íƒë°°ì°¨ì— ë¬¼ê±´ ì‹£ê¸°
             pickups[index] -= pickupAmount;
             needPickup -= pickupAmount;
             cur_cap += pickupAmount;
@@ -145,8 +145,8 @@ long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, v
         cout << "needPickup: " << needPickup << endl;
 #endif
 
-        index += direction; //´ÙÀ½ ¹æÇâÀ¸·Î °¡±â
-        distance++; //ÀÌµ¿ °Å¸® °è»ê
+        index += direction; //ë‹¤ìŒ ë°©í–¥ìœ¼ë¡œ ê°€ê¸°
+        distance++; //ì´ë™ ê±°ë¦¬ ê³„ì‚°
 
     }
 

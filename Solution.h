@@ -6,6 +6,6 @@
 class Solution
 {
 public: 
-	virtual void ÁøÇà() = 0;
+	virtual void ì§„í–‰() = 0;
 };
 
