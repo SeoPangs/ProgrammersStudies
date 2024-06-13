@@ -3,10 +3,10 @@
 
 using namespace std;
 
-class ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â : public Solution
+class íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸° : public Solution
 {
 public:
-	virtual void ÁøÇà() override;
+	virtual void ì§„í–‰() override;
 	long long solution(int cap, int n, vector<int> deliveries, vector<int> pickups);
 };
 
