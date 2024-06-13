@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\문제">
+      <UniqueIdentifier>{4cc9105b-28c6-472c-9c3b-efedbf84d15b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\문제">
+      <UniqueIdentifier>{c94a9022-bfc6-47c4-8fbd-d7db2fddd8a5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -22,18 +28,21 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="택배배달과수거하기.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\문제</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Solution.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="택배배달과수거하기.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="택배배달과수거하기.h">
+      <Filter>헤더 파일\문제</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="cpp.hint" />
   </ItemGroup>
 </Project>
