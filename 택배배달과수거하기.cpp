@@ -17,8 +17,7 @@ void 택배배달과수거하기::진행()
 
     //물건을 수거해야하는 가구의 배열
     vector<int> pickup = { 0, 3, 0, 4, 0 };
-
-    cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
+    std::cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
 }
 
 #define INDEX_MAX 1000000
@@ -58,8 +57,10 @@ long long 택배배달과수거하기::solution(int cap, int n, vector<int> deliveries, v
     
     int index = -1; //현재 택배가 어디를 향하고 있는지에 따른 인덱스 값
     int direction = 1; //현재 택배가 어느 방향으로 가는지 1 or -1
-    int turning_point = n;
+    int turningPoint = n-1;
 
+    vector<int> deliveryPlan = {}; //배달할 물건 계획
+    vector<int> pickupPlan = {}; // 수거할 물건 계획
     //현재 운반해야할 물건이 없으면
     while (needDelivery > 0 || needPickup > 0) 
     {   
@@ -68,17 +69,36 @@ long long 택배배달과수거하기::solution(int cap, int n, vector<int> deliveries, v
         {
             //모든 물건을 다시 채우기
             cur_cap = max_cap;
+            
+            //배송계획 세우기
+            for (int i = n - 1; i >= 0; i--)
+            {
+                auto& delivery = deliveries[i];
+                auto& pickup = pickups[i];
+
+                //반환점 확인하기
+                if (deliveries[turningPoint] == 0 && deliveries[turningPoint] == 0)
+                {
+                    turningPoint--;
+                }
+                
+                if (deliveries[turningPoint])
+
+                if ((cur_cap - max_cap)== 0)
+                {
+                    break;
+                }
+                
+            }
+
             direction = 1;
             index = 0; //시작점으로 가기
         }
-        else if (index > (n - 1))
+        else if (index > (turningPoint))
         {
             direction = -1;
             index = n - 1;
         }
-
-        
-        
 
 
         //앞으로 가면 택배 배달하기
