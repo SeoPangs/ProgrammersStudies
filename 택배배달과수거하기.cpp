@@ -1,142 +1,57 @@
-#include "ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â.h"
+#include "íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°.h"
 #include <string>
 #include <vector>
 
 using namespace std;
 
-void ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::ÁøÇà()
+void íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°::ì§„í–‰()
 {
-    //ÅÃ¹è ¿ë´ŞÂ÷ÀÇ ¿ë·®
+    //íƒë°° ìš©ë‹¬ì°¨ì˜ ìš©ëŸ‰
     int cap = 4;
 
-    //ÅÃ¹è ¹è´ŞÇÒ °¡±¸ÀÇ ¼ö
+    //íƒë°° ë°°ë‹¬í•  ê°€êµ¬ì˜ ìˆ˜
     int n = 5;
 
-    //¹°°ÇÀ» ¹è´ŞÇØ¾ßÇÏ´Â °¡±¸ÀÇ ¹è¿­
+    //ë¬¼ê±´ì„ ë°°ë‹¬í•´ì•¼í•˜ëŠ” ê°€êµ¬ì˜ ë°°ì—´
     vector<int> deliveries = { 1, 0, 3, 1, 2 };
 
-    //¹°°ÇÀ» ¼ö°ÅÇØ¾ßÇÏ´Â °¡±¸ÀÇ ¹è¿­
+    //ë¬¼ê±´ì„ ìˆ˜ê±°í•´ì•¼í•˜ëŠ” ê°€êµ¬ì˜ ë°°ì—´
     vector<int> pickup = { 0, 3, 0, 4, 0 };
-
-    cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
+    std::cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
 }
 
 #define INDEX_MAX 1000000
 
-long long ÅÃ¹è¹è´Ş°ú¼ö°ÅÇÏ±â::solution(int cap, int n, vector<int> deliveries, vector<int> pickups)
+long long íƒë°°ë°°ë‹¬ê³¼ìˆ˜ê±°í•˜ê¸°::solution(int cap, int n, vector<int> deliveries, vector<int> pickups)
 {
-    //Ãâ·ÂÇÒ ´ä
-    long long answer = -1;
+    //ì¶œë ¥í•  ë‹µ
+    long long answer = 0;
 
-    //ÀÌµ¿ÇÑ °Å¸®°¡ ´ä
+    //ì´ë™í•œ ê±°ë¦¬ê°€ ë‹µ
     long long& distance = answer;
 
-    //ÃÖ´ë  °¡Áú ¼ö ÀÖ´Â ÅÃ¹è ¹è´ŞÀÇ ¿ë·®
-    int max_cap = cap;
-    //ÇöÀç °¡Áö°í ÀÖ´Â ÅÃ¹è ¹è´ŞÀÇ ¿ë·®
-    int cur_cap = 0;
+    const auto& truckCapacity = cap;
+    
+    int needDelivery = 0; //ë°°ë‹¬í•´ì•¼í•  íƒë°°ì˜ ìˆ˜
+    int needPickup = 0; //ìˆ˜ê±°í•´ì•¼í•  íƒë°°ì˜ ìˆ˜
 
-    //¹è´ŞÇØ¾ßÇÒ ÅÃ¹èÀÇ ¼ö
-    int needDelivery = 0;
-    for(auto delivery : deliveries)
+    //í˜„ì¬ ìš´ë°˜í•´ì•¼í•  ë¬¼ê±´ì´ ì—†ìœ¼ë©´
+    for (int i = n - 1; i >= 0; i--)
     {
+        auto& delivery = deliveries[i];
+        auto& pickup = pickups[i];
+
         needDelivery += delivery;
-    }
-
-    //¼ö°ÅÇØ¾ßÇÒ ÅÃ¹èÀÇ ¼ö
-    int needPickup = 0;
-    for (auto pickup : pickups)
-    {
         needPickup += pickup;
-    }
 
-    
-#pragma region ´Ü¼ø
-
-    //¹è´ŞÀ» ½ÃÀÛÇÕ´Ï´Ù.
-
-    
-    int index = -1; //ÇöÀç ÅÃ¹è°¡ ¾îµğ¸¦ ÇâÇÏ°í ÀÖ´ÂÁö¿¡ µû¸¥ ÀÎµ¦½º °ª
-    int direction = 1; //ÇöÀç ÅÃ¹è°¡ ¾î´À ¹æÇâÀ¸·Î °¡´ÂÁö 1 or -1
-    int turning_point = n;
-
-    //ÇöÀç ¿î¹İÇØ¾ßÇÒ ¹°°ÇÀÌ ¾øÀ¸¸é
-    while (needDelivery > 0 || needPickup > 0) 
-    {   
-        //ÀÎµ¦½º ¹üÀ§ ¾È¿¡ ¾øÀ¸¸é
-        if (index < 0)
+        while (needDelivery > 0 || needPickup > 0) 
         {
-            //¸ğµç ¹°°ÇÀ» ´Ù½Ã Ã¤¿ì±â
-            cur_cap = max_cap;
-            direction = 1;
-            index = 0; //½ÃÀÛÁ¡À¸·Î °¡±â
+            needDelivery -= truckCapacity;
+            needPickup -= truckCapacity;
+            distance += (static_cast<long long>(i+1) * 2);
         }
-        else if (index > (n - 1))
-        {
-            direction = -1;
-            index = n - 1;
-        }
-
-        
-        
-
-
-        //¾ÕÀ¸·Î °¡¸é ÅÃ¹è ¹è´ŞÇÏ±â
-        if (direction > 0)
-        {
-            //¿î¹İÇØ¾ßÇÒ Å©±â
-            int deliveryAmount = min(cur_cap, deliveries[index]);
-
-            //ÅÃ¹èÂ÷¿¡ ¹°°Ç ³»·Á³õ±â
-            deliveries[index] -= deliveryAmount; // ¹è¼ÛÇØ¾ßµÉ ¹°°ÇÀ» ¹è¼ÛÇßÀ¸´Ï °¨¼Ò
-            cur_cap -= deliveryAmount; //ÅÃ¹è ¿ë·® »ı°åÀ¸´Ï ¿ë·® Áõ°¡
-            needDelivery -= deliveryAmount; //¹è¼ÛÇØ¾ßµÉ ¹°°ÇÀ» ¹è¼ÛÇßÀ¸´Ï °¨¼Ò
-        }
-
-        //µÚ·Î °¡¸é ÅÃ¹è ¼ö°ÅÇÏ±â
-        if (direction < 0)
-        {
-            //¿î¹İÇØ¾ßÇÒ Å©±â
-            int pickupAmount = min(max_cap - cur_cap, pickups[index]);
-
-            //ÅÃ¹èÂ÷¿¡ ¹°°Ç ½Æ±â
-            pickups[index] -= pickupAmount;
-            needPickup -= pickupAmount;
-            cur_cap += pickupAmount;
-            
-        }
-#if true
-        cout << "index: " << index << endl;
-        cout << "cur_cap: " << cur_cap << endl;
-        cout << "Deliveries: ";
-        for (auto i : deliveries)
-        {
-            cout << i << " ";
-        }
-        cout << endl;
-        cout << "Pickups: ";
-        for (auto i : pickups)
-        {
-            cout << i << " ";
-        }
-        cout << endl << endl;
-        cout << "Direction: " << direction << endl;
-        cout << "needDelivery: " << needDelivery << endl;
-        cout << "needPickup: " << needPickup << endl;
-#endif
-
-        index += direction; //´ÙÀ½ ¹æÇâÀ¸·Î °¡±â
-        distance++; //ÀÌµ¿ °Å¸® °è»ê
 
     }
-
-
-#pragma endregion
-
-
-    
-
-
 
     return answer;
 }
