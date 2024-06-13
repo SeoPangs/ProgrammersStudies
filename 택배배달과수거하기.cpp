@@ -20,8 +20,6 @@ void 택배배달과수거하기::진행()
     std::cout << "Solution " << solution(cap, n, deliveries, pickup) << endl;
 }
 
-#define INDEX_MAX 1000000
-
 long long 택배배달과수거하기::solution(int cap, int n, vector<int> deliveries, vector<int> pickups)
 {
     //출력할 답

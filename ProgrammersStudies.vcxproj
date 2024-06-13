@@ -129,11 +129,13 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Solution.cpp" />
+    <ClCompile Include="이모티콘할인행사.cpp" />
     <ClCompile Include="택배배달과수거하기.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h" />
     <ClInclude Include="Solution.h" />
+    <ClInclude Include="이모티콘할인행사.h" />
     <ClInclude Include="택배배달과수거하기.h" />
   </ItemGroup>
   <ItemGroup>
